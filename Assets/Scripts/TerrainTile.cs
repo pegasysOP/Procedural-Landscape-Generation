@@ -14,23 +14,17 @@ public class TerrainTile : MonoBehaviour
     TerrainType[] terrainTypes;
 
     /// <summary>
-    /// Initialise the mesh with the provided parameters
+    /// Initialise the mesh to the provided heightmap
     /// </summary>
-    /// <param name="resolution">How 'zoomed' the noise map is</param>
+    /// <param name="heightMap">Height map to get vertex positions and colours from</param>
     /// <param name="maxHeight">Highest possible location of a vertex</param>
     /// <param name="heightCurve">The height curve</param>
     /// <param name="terrainTypes">List of the types of terrian at each height</param>
-    /// <param name="waves">List of waves to be used for noise generation</param>
-    public void Init(float resolution, float maxHeight, AnimationCurve heightCurve, TerrainType[] terrainTypes, Wave[] waves)
+    public void Init(float[,] heightMap, float maxHeight, AnimationCurve heightCurve, TerrainType[] terrainTypes)
     {
         this.maxHeight = maxHeight;
         this.heightCurve = heightCurve;
         this.terrainTypes = terrainTypes;
-
-        Vector3[] meshVertices = meshFilter.mesh.vertices;
-        int tileSize = (int)Mathf.Sqrt(meshVertices.Length); // since it's square, the depth and width will be equal
-
-        float[,] heightMap = NoiseMapGeneration.GenerateNoiseMap(tileSize, tileSize, resolution, -transform.position.x, -transform.position.z, waves);
 
         meshRenderer.material.mainTexture = BuildTexture(heightMap);
         UpdateMeshVertices(heightMap);
@@ -114,6 +108,13 @@ public class TerrainTile : MonoBehaviour
         meshFilter.mesh.RecalculateNormals();
 
         meshCollider.sharedMesh = meshFilter.mesh;
+    }
+
+    public int GetMeshSize()
+    {
+        Vector3[] meshVertices = meshFilter.mesh.vertices;
+        return (int)Mathf.Sqrt(meshVertices.Length); // since it's square, the depth and width will be equal
+
     }
 }
 

@@ -57,9 +57,13 @@ public class LevelGeneration : MonoBehaviour
         for (int i  = 0; i < waves.Length; i++)
             waves[i].seed = Random.Range(1f, 10000f);
 
+        int meshSize = tiles[0].GetMeshSize();
+
         foreach (TerrainTile tile in tiles)
         {
-            tile.Init(resolution, maxHeight, heightCurve, terrainTypes, waves);
+            float[,] heightMap = NoiseMapGeneration.GenerateNoiseMap(meshSize, meshSize, resolution, 
+                -tile.transform.position.x, -tile.transform.position.z, waves);
+            tile.Init(heightMap, maxHeight, heightCurve, terrainTypes);
         }
     }
 }

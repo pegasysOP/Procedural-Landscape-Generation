@@ -11,7 +11,7 @@ public class LevelGeneration : MonoBehaviour
     [SerializeField] float maxHeight;
 
     [Header("Terrain Settings")]
-    [Range(1f, 10f)]
+    [Range(1f, 100f)]
     [SerializeField] float resolution;
     [SerializeField] AnimationCurve heightCurve;
     [SerializeField] TerrainType[] terrainTypes;
@@ -57,12 +57,12 @@ public class LevelGeneration : MonoBehaviour
         for (int i  = 0; i < waves.Length; i++)
             waves[i].seed = Random.Range(1f, 10000f);
 
-        int meshSize = tiles[0].GetMeshSize();
+        int meshSize = tiles[0].GetMeshSize() + 2; // include the positions one over from the border for normal calculations
 
         foreach (TerrainTile tile in tiles)
         {
             float[,] heightMap = NoiseMapGeneration.GenerateNoiseMap(meshSize, meshSize, resolution, 
-                -tile.transform.position.x, -tile.transform.position.z, waves);
+                -tile.transform.position.x - 1, -tile.transform.position.z -1, waves);
             tile.Init(heightMap, maxHeight, heightCurve, terrainTypes);
         }
     }

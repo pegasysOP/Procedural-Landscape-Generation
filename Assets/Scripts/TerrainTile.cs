@@ -1,29 +1,36 @@
 using UnityEngine;
 
-public class TileGeneration : MonoBehaviour
+[RequireComponent (typeof(MeshRenderer))]
+[RequireComponent (typeof(MeshFilter))]
+[RequireComponent (typeof(MeshCollider))]
+public class TerrainTile : MonoBehaviour
 {
     [SerializeField] MeshRenderer meshRenderer;
     [SerializeField] MeshFilter meshFilter;
     [SerializeField] MeshCollider meshCollider;
 
-    [SerializeField] float mapScale;
-    [SerializeField] float maxHeight;
+    float maxHeight;
+    AnimationCurve heightCurve;
+    TerrainType[] terrainTypes;
 
-    [SerializeField] TerrainType[] terrainTypes;
-    [SerializeField] AnimationCurve heightCurve;
-    [SerializeField] Wave[] waves;
-
-    private void Start()
+    /// <summary>
+    /// Initialise the mesh with the provided parameters
+    /// </summary>
+    /// <param name="resolution">How 'zoomed' the noise map is</param>
+    /// <param name="maxHeight">Highest possible location of a vertex</param>
+    /// <param name="heightCurve">The height curve</param>
+    /// <param name="terrainTypes">List of the types of terrian at each height</param>
+    /// <param name="waves">List of waves to be used for noise generation</param>
+    public void Init(float resolution, float maxHeight, AnimationCurve heightCurve, TerrainType[] terrainTypes, Wave[] waves)
     {
-        GenerateTile();
-    }
+        this.maxHeight = maxHeight;
+        this.heightCurve = heightCurve;
+        this.terrainTypes = terrainTypes;
 
-    private void GenerateTile()
-    {
         Vector3[] meshVertices = meshFilter.mesh.vertices;
         int tileSize = (int)Mathf.Sqrt(meshVertices.Length); // since it's square, the depth and width will be equal
 
-        float[,] heightMap = NoiseMapGeneration.GenerateNoiseMap(tileSize, tileSize, mapScale, -transform.position.x, -transform.position.z, waves);
+        float[,] heightMap = NoiseMapGeneration.GenerateNoiseMap(tileSize, tileSize, resolution, -transform.position.x, -transform.position.z, waves);
 
         meshRenderer.material.mainTexture = BuildTexture(heightMap);
         UpdateMeshVertices(heightMap);

@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 437758894}
   - component: {fileID: 437758895}
   m_Layer: 0
-  m_Name: Level
+  m_Name: Level Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,6 +170,61 @@ MonoBehaviour:
   tilePrefab: {fileID: 2159473594408695413, guid: 6ad26a63b8a214945b1dc5d1bc3a8a5a, type: 3}
   mapWidth: 10
   mapDepth: 10
+  maxHeight: 20
+  resolution: 5
+  heightCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.4
+      value: 0
+      inSlope: Infinity
+      outSlope: 0.002515269
+      tangentMode: 7
+      weightedMode: 2
+      inWeight: 0.19606523
+      outWeight: 0.44713658
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  terrainTypes:
+  - name: water
+    height: 0.4
+    color: {r: 0.43529415, g: 0.69411767, b: 1, a: 1}
+  - name: grass
+    height: 0.7
+    color: {r: 0, g: 0.54509807, b: 0.11764707, a: 1}
+  - name: mountain
+    height: 1
+    color: {r: 0.38431376, g: 0.2784314, b: 0, a: 1}
+  waves:
+  - seed: 5613
+    frequency: 1
+    amplitude: 1
+  - seed: 9551
+    frequency: 0.5
+    amplitude: 2
+  - seed: 6712
+    frequency: 0.25
+    amplitude: 4
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

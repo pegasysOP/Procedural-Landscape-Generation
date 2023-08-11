@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18246467, g: 0.22817619, b: 0.30725744, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -168,10 +168,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePrefab: {fileID: 2159473594408695413, guid: 6ad26a63b8a214945b1dc5d1bc3a8a5a, type: 3}
-  mapWidth: 10
-  mapDepth: 10
-  maxHeight: 20
-  resolution: 5
+  mapWidth: 50
+  mapDepth: 50
+  maxHeight: 50
+  resolution: 10
   heightCurve:
     serializedVersion: 2
     m_Curve:
@@ -216,13 +216,13 @@ MonoBehaviour:
     height: 1
     color: {r: 0.38431376, g: 0.2784314, b: 0, a: 1}
   waves:
-  - seed: 5613
+  - seed: 556.04736
     frequency: 1
     amplitude: 1
-  - seed: 9551
+  - seed: 8845.816
     frequency: 0.5
     amplitude: 2
-  - seed: 6712
+  - seed: 8834.086
     frequency: 0.25
     amplitude: 4
 --- !u!1 &705507993
@@ -311,14 +311,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalRotation: {x: 0.16933563, y: 0.77144635, z: -0.3077187, w: 0.5305706}
+  m_LocalPosition: {x: 0, y: 43.67, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 40.879, y: 109.116, z: -4.952}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,11 +395,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.38418517, y: 0.30983484, z: -0.13863832, w: 0.85859394}
-  m_LocalPosition: {x: -0.85, y: 52.42, z: -12.16}
+  m_LocalRotation: {x: 0.26067814, y: 0.21103258, z: -0.058506865, w: 0.9402602}
+  m_LocalPosition: {x: 118.4, y: 118.19, z: -15.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 48.213, y: 39.685, z: 0}
+  m_LocalEulerAnglesHint: {x: 30.991, y: 25.3, z: 0}

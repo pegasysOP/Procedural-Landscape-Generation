@@ -105,7 +105,8 @@ public class TerrainTile : MonoBehaviour
         // update the mesh to the new vertices
         meshFilter.mesh.vertices = vertices;
         meshFilter.mesh.RecalculateBounds();
-        meshFilter.mesh.RecalculateNormals();
+        //meshFilter.mesh.RecalculateNormals(); // the meshfilter has no knowledge of adjacent tiles and so seams are visible
+        meshFilter.mesh.normals = CalculateNormals(heightMap);
 
         meshCollider.sharedMesh = meshFilter.mesh;
     }
@@ -114,7 +115,39 @@ public class TerrainTile : MonoBehaviour
     {
         Vector3[] meshVertices = meshFilter.mesh.vertices;
         return (int)Mathf.Sqrt(meshVertices.Length); // since it's square, the depth and width will be equal
+    }
 
+    public static Vector3[] CalculateNormals(float[,] heightMap)
+    {
+        int depth = heightMap.GetLength(0);
+        int width = heightMap.GetLength(1);
+
+        Vector3[] normals = new Vector3[depth * width];
+
+        for (int x = 0; x < width; x++)
+        {
+            for (int z = 0; z < depth; z++)
+            {
+                int vertexIndex = x * depth + z;
+
+                // edge verteces
+                if (x == 0 || x == width - 1 || z == 0 || z == depth - 1)
+                {
+                    normals[vertexIndex] = Vector3.up;
+                    continue;
+                }
+
+                float gradientZ = heightMap[z + 1, x] - heightMap[z - 1, x];
+                float gradientX = heightMap[z, x + 1] - heightMap[z, x - 1];
+
+                Vector3 normal = new Vector3(-gradientZ, 0.5f, -gradientX);
+                normal.Normalize();
+
+                normals[vertexIndex] = normal;
+            }
+        }
+
+        return normals;
     }
 }
 

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,9 +27,9 @@ public class LevelGeneration : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            GenerateTerrain();
+            StartCoroutine(GenerateTerrain());
         }
     }
 
@@ -51,7 +52,7 @@ public class LevelGeneration : MonoBehaviour
         }
     }
 
-    private void GenerateTerrain()
+    private IEnumerator GenerateTerrain()
     {
         // randomise seeds for the waves
         for (int i  = 0; i < waves.Length; i++)
@@ -65,5 +66,7 @@ public class LevelGeneration : MonoBehaviour
                 -tile.transform.position.x - 1, -tile.transform.position.z -1, waves);
             tile.Init(heightMap, maxHeight, heightCurve, terrainTypes);
         }
+
+        yield return null;
     }
 }

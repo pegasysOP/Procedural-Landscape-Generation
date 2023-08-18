@@ -1,0 +1,11 @@
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel Spheres
+
+RWStructuredBuffer<float3> Result;
+uniform float Time;
+
+[numthreads(64, 1, 1)]
+void Spheres(uint3 id : SV_DispatchThreadID)
+{
+    Result[id.x] = float3(id.x, 0, 0);
+}

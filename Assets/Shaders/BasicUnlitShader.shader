@@ -54,5 +54,6 @@ Shader "Shaders/BasicUnlitShader"
             ENDCG
         }
     }
+    
     Fallback "VertexLit"
 }

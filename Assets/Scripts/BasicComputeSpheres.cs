@@ -32,6 +32,7 @@ public class BasicComputeSpheres : MonoBehaviour
 
     void Update()
     {
+        shader.SetFloat("Time", Time.time);
         shader.SetBuffer(kernel, "Result", resultBuffer);
 
         int threadGroups = (int) ((sphereAmount + (threadGroupSize - 1)) / threadGroupSize);
